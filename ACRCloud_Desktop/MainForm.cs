@@ -106,6 +106,10 @@ namespace ACRCloud_Desktop
                             {
                                 dynamic metadata = stuff.metadata;
                                 Data d = new Data();
+
+                                try { d.Filename = file; }
+                                catch (Exception) { d.Filename = ""; }
+
                                 try { d.Time = init_sec.ToString(); }
                                 catch (Exception) { d.Time = ""; }
 
@@ -139,8 +143,8 @@ namespace ACRCloud_Desktop
                                 try { d.Custom_Files_Title = metadata.custom_files[0].title; }
                                 catch (Exception) { d.Custom_Files_Title = ""; }
                                 
-                                try { d.Audioid = metadata.custom_files[0].audio_id; }
-                                catch (Exception) { d.Audioid = ""; }
+                                try { d.Audio_id = metadata.custom_files[0].audio_id; }
+                                catch (Exception) { d.Audio_id = ""; }
                                 SaveData.Save(row_i, d);
                                 row_i++;
                                 result = init_sec.ToString() + "\t" + d.Custom_Files_Title + "\t" + d.Title;
@@ -224,6 +228,9 @@ namespace ACRCloud_Desktop
                 int row_ = 1 + i;
                 int dt_row = i - 1;
                 myExport.AddRow();
+                try { myExport["Filename"] = d.Filename; }
+                catch (Exception) { myExport["Filename"] = ""; }
+
                 try { myExport["Time"] = d.Time.ToString(); }
                 catch (Exception) { myExport["Time"] = ""; }
 
@@ -257,8 +264,8 @@ namespace ACRCloud_Desktop
                 try { myExport["Custom_Files_Title"] = d.Custom_Files_Title.ToString(); }
                 catch (Exception) { myExport["Custom_Files_Title"] = ""; }
 
-                try { myExport["Audioid"] = d.Audioid.ToString(); }
-                catch (Exception) { myExport["Audioid"] = ""; }
+                try { myExport["Audio_id"] = d.Audio_id.ToString(); }
+                catch (Exception) { myExport["Audio_id"] = ""; }
             }
             myExport.ExportToFile(P_obj_csvName);
         }

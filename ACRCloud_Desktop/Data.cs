@@ -8,6 +8,7 @@ namespace ACRCloud_Desktop
 {
     public class Data
     {
+        public string Filename { get; set; }
         public string Time { get; set; }
         public string Title { get; set; }
         public string Artist { get; set; }
@@ -20,6 +21,6 @@ namespace ACRCloud_Desktop
         public string Spotify { get; set; }
         public string iTunes { get; set; }
         public string Custom_Files_Title { get; set; }
-        public string Audioid { get; set; }
+        public string Audio_id { get; set; }
     }
 }
