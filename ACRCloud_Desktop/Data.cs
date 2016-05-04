@@ -19,11 +19,7 @@ namespace ACRCloud_Desktop
         public string Deezer { get; set; }
         public string Spotify { get; set; }
         public string iTunes { get; set; }
-    }
-    public class CustomData
-    {
-        public string Time { get; set; }
-        public string Title { get; set; }
+        public string Custom_Files_Title { get; set; }
         public string Audioid { get; set; }
     }
 }

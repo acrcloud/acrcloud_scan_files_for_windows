@@ -16,14 +16,4 @@ namespace ACRCloud_Desktop
         }
 
     }
-
-    public class SaveCustomData
-    {
-        public static Dictionary<int, CustomData> dicData = new Dictionary<int, CustomData>();
-        public static void Save(int i, CustomData d)//
-        {
-            dicData.Add(i, d);
-        }
- 
-    }
 }

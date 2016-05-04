@@ -11,4 +11,5 @@
 
 ![](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/stepbystep.png)
 
-![](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/example.png)
+![](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/example.jpeg)
+
