@@ -69,6 +69,7 @@ namespace ACRCloud_Desktop
             }
         }
         int row_i = 0;
+        string type = "";
         private void Start()
         {
             try
@@ -101,49 +102,100 @@ namespace ACRCloud_Desktop
                         else
                         {
                             dynamic stuff = JsonConvert.DeserializeObject(result);
-                            string msg = stuff.status.msg;
-                            if (msg == "Success")
+                            int code = stuff.status.code;
+                            if (code == 0)
                             {
-                                result = init_sec.ToString() + "\t" + stuff.metadata.music[0].title;
-                                dynamic metadata = stuff.metadata.music[0];
+                                dynamic metadata = stuff.metadata;
+                                
+                                if (result.Contains("music") && result.Contains("artists"))
+                                {
+                                    type = "music";
+                                    Data d = new Data();
+                                    try { d.Time = init_sec.ToString(); }
+                                    catch (Exception) { d.Time = ""; }
 
-                                Data d = new Data();
-                                try{d.Time = init_sec.ToString();}
-                                catch (Exception){d.Time = "";}
-                                    
-                                try{ d.Title = metadata.title;}
-                                catch (Exception){d.Title = "";}
-                                   
-                                try{ d.Artist = metadata.artists[0].name;}
-                                catch (Exception){d.Artist = "";}
-                                    
-                                try{ d.Album = metadata.album.name;}
-                                catch (Exception){ d.Album = "";}
-                                    
-                                try{ d.Acrid = metadata.acrid;}
-                                catch (Exception){d.Acrid ="";}
-                                    
-                                try{d.Label = metadata.label;}
-                                catch (Exception) {d.Label ="";}
-                                    
-                                try{d.Isrc = metadata.external_ids.isrc;}
-                                catch (Exception){d.Isrc = "";}
+                                    try { d.Title = metadata.music[0].title; }
+                                    catch (Exception) { d.Title = ""; }
 
-                                try{d.Deezer = metadata.external_metadata.deezer.track.id;}
-                                catch (Exception){d.Deezer = "";} 
+                                    try { d.Artist = metadata.music[0].artists[0].name; }
+                                    catch (Exception) { d.Artist = ""; }
 
-                                try{d.Spotify = metadata.external_metadata.spotify.track.id;}
-                                catch (Exception){d.Spotify ="";}
+                                    try { d.Album = metadata.music[0].album.name; }
+                                    catch (Exception) { d.Album = ""; }
 
-                                try{d.iTunes = metadata.external_metadata.itunes.track.id;}
-                                catch (Exception){ d.iTunes = "";}
-                                SaveData.Save(row_i, d);
-                                row_i++;
+                                    try { d.Acrid = metadata.music[0].acrid; }
+                                    catch (Exception) { d.Acrid = ""; }
+
+                                    try { d.Label = metadata.music[0].label; }
+                                    catch (Exception) { d.Label = ""; }
+
+                                    try { d.Isrc = metadata.music[0].external_ids.isrc; }
+                                    catch (Exception) { d.Isrc = ""; }
+
+                                    try { d.Deezer = metadata.music[0].external_metadata.deezer.track.id; }
+                                    catch (Exception) { d.Deezer = ""; }
+
+                                    try { d.Spotify = metadata.music[0].external_metadata.spotify.track.id; }
+                                    catch (Exception) { d.Spotify = ""; }
+
+                                    try { d.iTunes = metadata.music[0].external_metadata.itunes.track.id; }
+                                    catch (Exception) { d.iTunes = ""; }
+                                    SaveData.Save(row_i, d);
+                                    row_i++;
+                                    result = init_sec.ToString() + "\t" + metadata.music[0].title;
+                                }
+                                else if (result.Contains("custom_files") && result.Contains("bucket_id"))
+                                {
+                                    type = "custom_files";
+                                    CustomData d = new CustomData();
+                                    try { d.Time = init_sec.ToString(); }
+                                    catch (Exception) { d.Time = ""; }
+
+                                    try { d.Title = metadata.custom_files[0].title; }
+                                    catch (Exception) { d.Title = ""; }
+
+                                    try { d.Audioid = metadata.custom_files[0].audio_id; }
+                                    catch (Exception) { d.Audioid = ""; }
+                                    SaveCustomData.Save(row_i, d);
+                                    row_i++;
+                                    result = init_sec.ToString() + "\t" + metadata.custom_files[0].title + "\t" + metadata.custom_files[0].audio_id;
+
+                                }
 
                             }
-                            else if (msg == "NoResult")
+                            else if (code == 1001)
                             {
                                 result = init_sec.ToString() + "\t" + "NoResult";
+                            }
+                            else if (code == 3001)
+                            {
+                                MessageBox.Show("Missing/Invalid Access Key");
+                                break;
+                            }
+                            else if (code == 3002)
+                            {
+                                MessageBox.Show("Invalid ContentType. valid Content-Type is multipart/form-data");
+                                break;
+                            }
+                            else if (code == 3003)
+                            {
+                                MessageBox.Show("Limit exceeded");
+                                break;
+                            }
+                            else if (code == 3006)
+                            {
+                                MessageBox.Show("Invalid parameters");
+                                break;
+                            }
+                            else if (code == 3014)
+                            {
+                                MessageBox.Show("InvalidSignature");
+                                break;
+                            }
+                            else if (code == 3015)
+                            {
+                                MessageBox.Show("Could not generate fingerprint");
+                                break;
                             }
                             else
                             {
@@ -184,39 +236,58 @@ namespace ACRCloud_Desktop
             
             for (int i = 1; i <= row_i; i++)
             {
-                Data d = SaveData.dicData[i-1];
-                int row_ = 1 + i;
-                int dt_row = i - 1;
-                myExport.AddRow();
-                try{myExport["Time"] = d.Time.ToString();}
-                catch (Exception){myExport["Time"] = "";}
+                if (type == "music")
+                {
+                    Data d = SaveData.dicData[i - 1];
+                    int row_ = 1 + i;
+                    int dt_row = i - 1;
+                    myExport.AddRow();
+                    try { myExport["Time"] = d.Time.ToString(); }
+                    catch (Exception) { myExport["Time"] = ""; }
 
-                try { myExport["Title"] = d.Title.ToString(); }
-                catch (Exception) { myExport["Title"] = ""; }
+                    try { myExport["Title"] = d.Title.ToString(); }
+                    catch (Exception) { myExport["Title"] = ""; }
 
-                try { myExport["Artist"] = d.Artist.ToString(); }
-                catch (Exception) { myExport["Artist"] = ""; }
+                    try { myExport["Artist"] = d.Artist.ToString(); }
+                    catch (Exception) { myExport["Artist"] = ""; }
 
-                try { myExport["Album"] = d.Album.ToString(); }
-                catch (Exception) { myExport["Album"] = ""; }
+                    try { myExport["Album"] = d.Album.ToString(); }
+                    catch (Exception) { myExport["Album"] = ""; }
 
-                try { myExport["Acrid"] = d.Acrid.ToString(); }
-                catch (Exception) { myExport["Acrid"] = ""; }
+                    try { myExport["Acrid"] = d.Acrid.ToString(); }
+                    catch (Exception) { myExport["Acrid"] = ""; }
 
-                try { myExport["Label"] = d.Label.ToString(); }
-                catch (Exception) { myExport["Label"] = ""; }
+                    try { myExport["Label"] = d.Label.ToString(); }
+                    catch (Exception) { myExport["Label"] = ""; }
 
-                try { myExport["Isrc"] = d.Isrc.ToString(); }
-                catch (Exception) { myExport["Isrc"] = ""; }
+                    try { myExport["Isrc"] = d.Isrc.ToString(); }
+                    catch (Exception) { myExport["Isrc"] = ""; }
 
-                try { myExport["Deezer"] = d.Deezer.ToString(); }
-                catch (Exception) { myExport["Deezer"] = ""; }
+                    try { myExport["Deezer"] = d.Deezer.ToString(); }
+                    catch (Exception) { myExport["Deezer"] = ""; }
 
-                try { myExport["Spotify"] = d.Spotify.ToString(); }
-                catch (Exception) { myExport["Spotify"] = ""; }
+                    try { myExport["Spotify"] = d.Spotify.ToString(); }
+                    catch (Exception) { myExport["Spotify"] = ""; }
 
-                try { myExport["iTunes"] = d.iTunes.ToString(); }
-                catch (Exception) { myExport["iTunes"] = ""; }
+                    try { myExport["iTunes"] = d.iTunes.ToString(); }
+                    catch (Exception) { myExport["iTunes"] = ""; }
+                }
+                else if (type == "custom_files")
+                {
+                    CustomData d = SaveCustomData.dicData[i - 1];
+                    int row_ = 1 + i;
+                    int dt_row = i - 1;
+                    myExport.AddRow();
+                    try { myExport["Time"] = d.Time.ToString(); }
+                    catch (Exception) { myExport["Time"] = ""; }
+
+                    try { myExport["Title"] = d.Title.ToString(); }
+                    catch (Exception) { myExport["Title"] = ""; }
+
+                    try { myExport["Acrid"] = d.Audioid.ToString(); }
+                    catch (Exception) { myExport["Acrid"] = ""; }
+ 
+                }
 
             }
             myExport.ExportToFile(P_obj_csvName);

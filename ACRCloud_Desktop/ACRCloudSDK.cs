@@ -23,7 +23,6 @@ namespace ACRCloud_Desktop
         {
             acr_init();
         }
-
         /**
           *
           *  create "ACRCloud Fingerprint" by wav audio buffer(RIFF (little-endian) data, WAVE audio, Microsoft PCM, 16 bit, mono 8000 Hz) 
