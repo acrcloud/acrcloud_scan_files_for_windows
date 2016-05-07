@@ -1,7 +1,7 @@
-# This is a tool witten in C# to recognize files.
+# This is a tool written in C# to recognize files.
 ## Usage
 
-1.Fill in the host, Access key, Access secret.
+1.Fill in the host, Access key, Access secret. 
 
 2.Choose File(Files) you want to recognize.
 
