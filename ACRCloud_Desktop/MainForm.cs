@@ -80,19 +80,18 @@ namespace ACRCloud_Desktop
                     MessageBox.Show("Interval must be greater than  5  seconds");
                 }
                 var config = new Dictionary<string, object>();
-                config.Add("host", hosttextBox.Text);
-                config.Add("access_key", keytextBox.Text);
-                config.Add("access_secret", secrettextbox.Text);
+                config.Add("host", hosttextBox.Text.Trim());
+                config.Add("access_key", keytextBox.Text.Trim());
+                config.Add("access_secret", secrettextbox.Text.Trim());
                 config.Add("timeout", 10); // seconds
                 ACRCloudRecognizer re = new ACRCloudRecognizer(config);
                 foreach (string file in ChoosedfileListBox.Items)
                 {
                     int init_sec = 0;
-                    int retry = 4;
+                    int retry = 5;
                     while (true)
                     {
                         string result = re.RecognizeByFile(file, init_sec);
-                        Console.WriteLine(retry);
                         if (result == "empty")
                         {
                             retry -= 1;
@@ -109,7 +108,9 @@ namespace ACRCloud_Desktop
                         else
                         {
                             dynamic stuff = JsonConvert.DeserializeObject(result);
-                            int code = stuff.status.code;
+                            int code = 1001;
+                            try { code = stuff.status.code; }
+                            catch (Exception) { code = 1001; }
                             if (code == 0)
                             {
                                 dynamic metadata = stuff.metadata;
