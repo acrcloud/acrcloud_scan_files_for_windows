@@ -289,7 +289,7 @@ namespace ACRCloud_Desktop
             byte[] fp = this.acrTool.CreateFingerprintByFile(filePath, startSeconds, 10, false);
             if (fp == null)
             {
-                return "";
+                return "empty";
             }
             return this.DoRecognize(fp);
         }

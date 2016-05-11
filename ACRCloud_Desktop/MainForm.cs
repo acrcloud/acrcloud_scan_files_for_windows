@@ -73,7 +73,6 @@ namespace ACRCloud_Desktop
         {
             try
             {
-                int init_sec = 0;
                 int INTERCVAL = 0;
                 INTERCVAL = int.Parse(intervaltextbox.Text);
                 if (INTERCVAL < 5)
@@ -88,15 +87,23 @@ namespace ACRCloud_Desktop
                 ACRCloudRecognizer re = new ACRCloudRecognizer(config);
                 foreach (string file in ChoosedfileListBox.Items)
                 {
+                    int init_sec = 0;
+                    int retry = 3;
                     while (true)
                     {
                         string result = re.RecognizeByFile(file, init_sec);
-                        if (result == "")
+                        if (result == "empty")
                         {
-                            init_sec = 0;
-                            Action<String> AsyncUIDelegate = delegate(string n) { MessageBox.Show("Done!"); choosefilebutton.Enabled = true; startbutton.Enabled = true; clearbutton.Enabled = true; exportbutton.Enabled = true; ChoosedfileListBox.Enabled = true; };
-                            ResultListBox.Invoke(AsyncUIDelegate, new object[] { "" });
-                            break;
+                            retry -= 1;
+                            if(retry == 0)
+                            {
+                                if (file.Equals(ChoosedfileListBox.Items[ChoosedfileListBox.Items.Count - 1].ToString()))
+                                {
+                                    Action<String> AsyncUIDelegate = delegate(string n) { MessageBox.Show("Done!"); choosefilebutton.Enabled = true; startbutton.Enabled = true; clearbutton.Enabled = true; exportbutton.Enabled = true; ChoosedfileListBox.Enabled = true; };
+                                    ResultListBox.Invoke(AsyncUIDelegate, new object[] { "" });
+                                } 
+                                break;
+                            }
                         }
                         else
                         {

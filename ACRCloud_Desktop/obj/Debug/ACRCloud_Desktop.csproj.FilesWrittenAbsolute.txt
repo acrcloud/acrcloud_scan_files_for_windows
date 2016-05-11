@@ -1,0 +1,8 @@
+/Users/owlwang/Documents/Visual Studio 2013/Projects/ACRCloud_Desktop/ACRCloud_Desktop/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/owlwang/Documents/Visual Studio 2013/Projects/ACRCloud_Desktop/ACRCloud_Desktop/obj/Debug/ACRCloud_Desktop.MainForm.resources
+/Users/owlwang/Documents/Visual Studio 2013/Projects/ACRCloud_Desktop/ACRCloud_Desktop/obj/Debug/ACRCloud_Desktop.Properties.Resources.resources
+/Users/owlwang/Documents/Visual Studio 2013/Projects/ACRCloud_Desktop/ACRCloud_Desktop/bin/Debug/ACRCloud_Desktop.exe.config
+/Users/owlwang/Documents/Visual Studio 2013/Projects/ACRCloud_Desktop/ACRCloud_Desktop/bin/Debug/ACRCloud_Desktop.exe.mdb
+/Users/owlwang/Documents/Visual Studio 2013/Projects/ACRCloud_Desktop/ACRCloud_Desktop/bin/Debug/ACRCloud_Desktop.exe
+/Users/owlwang/Documents/Visual Studio 2013/Projects/ACRCloud_Desktop/ACRCloud_Desktop/obj/Debug/ACRCloud_Desktop.exe
+/Users/owlwang/Documents/Visual Studio 2013/Projects/ACRCloud_Desktop/ACRCloud_Desktop/obj/Debug/ACRCloud_Desktop.exe.mdb
