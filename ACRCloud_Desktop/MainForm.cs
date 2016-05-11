@@ -88,10 +88,11 @@ namespace ACRCloud_Desktop
                 foreach (string file in ChoosedfileListBox.Items)
                 {
                     int init_sec = 0;
-                    int retry = 3;
+                    int retry = 4;
                     while (true)
                     {
                         string result = re.RecognizeByFile(file, init_sec);
+                        Console.WriteLine(retry);
                         if (result == "empty")
                         {
                             retry -= 1;
@@ -198,10 +199,9 @@ namespace ACRCloud_Desktop
                             }
                             Action<String> AsyncUIDelegate = delegate(string n) { ResultListBox.Items.Add(result); ResultListBox.Refresh(); ResultListBox.SelectedIndex = this.ResultListBox.Items.Count - 1; };
                             ResultListBox.Invoke(AsyncUIDelegate, new object[] { "" });
-                            init_sec += INTERCVAL;
 
                         }
-
+                        init_sec += INTERCVAL;
                     }
                 }
             }

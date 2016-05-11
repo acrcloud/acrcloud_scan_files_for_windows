@@ -43,7 +43,3 @@ C:\Users\sinyu\Documents\Tencent Files\1341156974\FileRecv\ACRCloud_Desktop\ACRC
 C:\Users\sinyu\Documents\Tencent Files\1341156974\FileRecv\ACRCloud_Desktop\ACRCloud_Desktop\ACRCloud_Desktop\obj\Debug\ACRCloud_Desktop.Properties.Resources.resources
 C:\Users\sinyu\Documents\Tencent Files\1341156974\FileRecv\ACRCloud_Desktop\ACRCloud_Desktop\ACRCloud_Desktop\obj\Debug\ACRCloud_Desktop.csproj.GenerateResource.Cache
 \\Mac\Home\Documents\Visual Studio 2013\Projects\ACRCloud_Desktop\ACRCloud_Desktop\obj\Debug\ACRCloud_Desktop.csproj.ResolveComReference.cache
-Z:\Users\owlwang\OneDrive\acrproject\acrcloud_scan_files_for_windows\ACRCloud_Desktop\bin\Debug\ACRCloud_Desktop.exe.config
-Z:\Users\owlwang\OneDrive\acrproject\acrcloud_scan_files_for_windows\ACRCloud_Desktop\obj\Debug\ACRCloud_Desktop.csproj.ResolveComReference.cache
-Z:\Users\owlwang\OneDrive\acrproject\acrcloud_scan_files_for_windows\ACRCloud_Desktop\obj\Debug\ACRCloud_Desktop.exe
-Z:\Users\owlwang\OneDrive\acrproject\acrcloud_scan_files_for_windows\ACRCloud_Desktop\obj\Debug\ACRCloud_Desktop.pdb
