@@ -2,7 +2,7 @@
 ## [Automatic Content Recognition](https://www.acrcloud.com/docs/introduction/automatic-content-recognition/)
 This is a <strong>[automatic content recognition](https://www.acrcloud.com/)</strong> program for Windows.<br>
 It's used to [identify songs](https://www.acrcloud.com/docs/acrcloud-services/for-pc-server/music-recognition/) or [detect audio content](https://www.acrcloud.com/docs/acrcloud-services/for-pc-server/custom-content-recognition/) in audio / video files with ACRCloud <strong>[audio recognition](https://www.acrcloud.com/docs/acrcloud-services/)</strong> service.<br>
-(Files can be songs, TV series, movies, radio / broadcast recordings and any audio / video file that contains content you want to recognize)
+(Files can be songs, TV series, movies, radio / broadcast recordings and any audio / video files that contain content you want to recognize)
 
 ## Requirements
 Follow the tutorials to create a project and get your host, access_key and access_secret.
