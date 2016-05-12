@@ -153,6 +153,7 @@
             // 
             // exportbutton
             // 
+            this.exportbutton.Enabled = false;
             this.exportbutton.Location = new System.Drawing.Point(627, 168);
             this.exportbutton.Name = "exportbutton";
             this.exportbutton.Size = new System.Drawing.Size(131, 51);
@@ -190,6 +191,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.keytextBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";

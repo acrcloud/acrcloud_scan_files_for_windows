@@ -82,7 +82,7 @@ namespace ACRCloud_Desktop
             }
             byte tIsDB = (isDB) ? (byte)1 : (byte)0;
             IntPtr pFpBuffer = IntPtr.Zero;
-            int fpBufferLen = create_fingerprint_by_file(Encoding.UTF8.GetBytes(filePath), startTimeSeconds, audioLenSeconds, tIsDB, ref pFpBuffer);
+            int fpBufferLen = create_fingerprint_by_file(filePath, startTimeSeconds, audioLenSeconds, tIsDB, ref pFpBuffer);
             if (fpBufferLen <= 0)
             {
                 return fpBuffer;
@@ -208,7 +208,7 @@ namespace ACRCloud_Desktop
         [DllImport("libacrcloud_extr_tool.dll")]
         private static extern int create_fingerprint(byte[] pcm_buffer, int pcm_buffer_len, byte is_db_fingerprint, ref IntPtr fps_buffer);
         [DllImport("libacrcloud_extr_tool.dll")]
-        private static extern int create_fingerprint_by_file(byte[] file_path, int start_time_seconds, int audio_len_seconds, byte is_db_fingerprint, ref IntPtr fps_buffer);
+        private static extern int create_fingerprint_by_file(string file_path, int start_time_seconds, int audio_len_seconds, byte is_db_fingerprint, ref IntPtr fps_buffer);
         [DllImport("libacrcloud_extr_tool.dll")]
         private static extern int create_fingerprint_by_filebuffer(byte[] file_buffer, int file_buffer_len, int start_time_seconds, int audio_len_seconds, byte is_db_fingerprint, ref IntPtr fps_buffer);
         [DllImport("libacrcloud_extr_tool.dll")]

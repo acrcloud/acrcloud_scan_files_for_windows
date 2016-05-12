@@ -68,6 +68,19 @@ namespace ACRCloud_Desktop
                 MessageBox.Show("Please choose files you want to recognize");
             }
         }
+
+        public static String formatLongToTimeStr(int sec)
+        {
+            TimeSpan ts = new TimeSpan(0, 0, sec);
+            string str = (int)ts.TotalHours + ":" + ts.Minutes + ":" + ts.Seconds;
+            return str;
+        }
+        public void enablebuttons()
+        {
+            Action<String> AsyncUIDelegate = delegate(string n) {choosefilebutton.Enabled = true; startbutton.Enabled = true; clearbutton.Enabled = true; ChoosedfileListBox.Enabled = true; };
+            ResultListBox.Invoke(AsyncUIDelegate, new object[] { "" });
+        }
+
         int row_i = 0;
         private void Start()
         {
@@ -91,6 +104,23 @@ namespace ACRCloud_Desktop
                     int retry = 5;
                     while (true)
                     {
+                        if (hosttextBox.Text == "") {
+                            MessageBox.Show("Host can not be empty");
+                            enablebuttons();
+                            break;
+                        }
+                        if (keytextBox.Text == "") {
+                            MessageBox.Show("Key can not be empty");
+                            enablebuttons();
+                            break;
+                        }
+                        if (secrettextbox.Text == "")
+                        {
+                            MessageBox.Show("Secret can not be empty");
+                            enablebuttons();
+                            break;
+                        }
+
                         string result = re.RecognizeByFile(file, init_sec);
                         if (result == "empty")
                         {
@@ -99,8 +129,10 @@ namespace ACRCloud_Desktop
                             {
                                 if (file.Equals(ChoosedfileListBox.Items[ChoosedfileListBox.Items.Count - 1].ToString()))
                                 {
-                                    Action<String> AsyncUIDelegate = delegate(string n) { MessageBox.Show("Done!"); choosefilebutton.Enabled = true; startbutton.Enabled = true; clearbutton.Enabled = true; exportbutton.Enabled = true; ChoosedfileListBox.Enabled = true; };
+                                    MessageBox.Show("Done!");
+                                    Action<String> AsyncUIDelegate = delegate(string n) { exportbutton.Enabled = true; };
                                     ResultListBox.Invoke(AsyncUIDelegate, new object[] { "" });
+                                    enablebuttons();
                                 } 
                                 break;
                             }
@@ -119,8 +151,8 @@ namespace ACRCloud_Desktop
                                 try { d.Filename = file; }
                                 catch (Exception) { d.Filename = ""; }
 
-                                try { d.Time = init_sec.ToString(); }
-                                catch (Exception) { d.Time = ""; }
+                                try { d.Time = init_sec; }
+                                catch (Exception) { d.Time = 0000; }
 
                                 try { d.Title = metadata.music[0].title; }
                                 catch (Exception) { d.Title = ""; }
@@ -167,31 +199,37 @@ namespace ACRCloud_Desktop
                             else if (code == 3001)
                             {
                                 MessageBox.Show("Missing/Invalid Access Key");
+                                enablebuttons();
                                 break;
                             }
                             else if (code == 3002)
                             {
                                 MessageBox.Show("Invalid ContentType. valid Content-Type is multipart/form-data");
+                                enablebuttons();
                                 break;
                             }
                             else if (code == 3003)
                             {
                                 MessageBox.Show("Limit exceeded");
+                                enablebuttons();
                                 break;
                             }
                             else if (code == 3006)
                             {
                                 MessageBox.Show("Invalid parameters");
+                                enablebuttons();
                                 break;
                             }
                             else if (code == 3014)
                             {
                                 MessageBox.Show("InvalidSignature");
+                                enablebuttons();
                                 break;
                             }
                             else if (code == 3015)
                             {
                                 MessageBox.Show("Could not generate fingerprint");
+                                enablebuttons();
                                 break;
                             }
                             else
@@ -239,7 +277,7 @@ namespace ACRCloud_Desktop
                 try { myExport["Filename"] = d.Filename; }
                 catch (Exception) { myExport["Filename"] = ""; }
 
-                try { myExport["Time"] = d.Time.ToString(); }
+                try { myExport["Time"] = formatLongToTimeStr(d.Time); }
                 catch (Exception) { myExport["Time"] = ""; }
 
                 try { myExport["Title"] = d.Title.ToString(); }
@@ -276,6 +314,7 @@ namespace ACRCloud_Desktop
                 catch (Exception) { myExport["Audio_id"] = ""; }
             }
             myExport.ExportToFile(P_obj_csvName);
+           
         }
         private void clearbutton_Click(object sender, EventArgs e)
         {

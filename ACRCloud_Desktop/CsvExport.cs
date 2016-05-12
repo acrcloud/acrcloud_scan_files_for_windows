@@ -162,7 +162,7 @@ namespace ACRCloud_Desktop
 		/// </summary>
 		public void ExportToFile(string path)
 		{
-			File.WriteAllLines(path, ExportToLines(), Encoding.UTF8);
+			File.WriteAllLines(path, ExportToLines(), Encoding.Default);
 		}
 
 		/// <summary>

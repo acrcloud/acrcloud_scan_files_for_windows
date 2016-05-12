@@ -9,7 +9,7 @@ namespace ACRCloud_Desktop
     public class Data
     {
         public string Filename { get; set; }
-        public string Time { get; set; }
+        public int Time { get; set; }
         public string Title { get; set; }
         public string Artist { get; set; }
 
