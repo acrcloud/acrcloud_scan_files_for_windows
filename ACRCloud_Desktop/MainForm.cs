@@ -181,6 +181,9 @@ namespace ACRCloud_Desktop
                                 try { d.iTunes = metadata.music[0].external_metadata.itunes.track.id; }
                                 catch (Exception) { d.iTunes = ""; }
 
+                                try { d.Youtube = metadata.music[0].external_metadata.youtube.vid; }
+                                catch (Exception) { d.Youtube = ""; }
+
                                 try { d.Custom_Files_Title = metadata.custom_files[0].title; }
                                 catch (Exception) { d.Custom_Files_Title = ""; }
                                 
@@ -306,6 +309,9 @@ namespace ACRCloud_Desktop
 
                 try { myExport["iTunes"] = d.iTunes.ToString(); }
                 catch (Exception) { myExport["iTunes"] = ""; }
+
+                try { myExport["Youtube"] = d.Youtube.ToString(); }
+                catch (Exception) { myExport["Youtube"] = ""; }
 
                 try { myExport["Custom_Files_Title"] = d.Custom_Files_Title.ToString(); }
                 catch (Exception) { myExport["Custom_Files_Title"] = ""; }

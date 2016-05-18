@@ -12,7 +12,6 @@ namespace ACRCloud_Desktop
         public int Time { get; set; }
         public string Title { get; set; }
         public string Artist { get; set; }
-
         public string Album { get; set; }
         public string Acrid { get; set; }
         public string Label { get; set; }
@@ -20,6 +19,7 @@ namespace ACRCloud_Desktop
         public string Deezer { get; set; }
         public string Spotify { get; set; }
         public string iTunes { get; set; }
+        public string Youtube { get; set; }
         public string Custom_Files_Title { get; set; }
         public string Audio_id { get; set; }
     }
