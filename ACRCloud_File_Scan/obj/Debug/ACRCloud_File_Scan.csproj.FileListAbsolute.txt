@@ -1,0 +1,12 @@
+\\mac\home\documents\visual studio 2013\Projects\ACRCloud_File_Scan\ACRCloud_File_Scan\bin\Debug\ACRCloud_File_Scan.exe.config
+\\mac\home\documents\visual studio 2013\Projects\ACRCloud_File_Scan\ACRCloud_File_Scan\bin\Debug\ACRCloud_File_Scan.exe
+\\mac\home\documents\visual studio 2013\Projects\ACRCloud_File_Scan\ACRCloud_File_Scan\bin\Debug\ACRCloud_File_Scan.pdb
+\\mac\home\documents\visual studio 2013\Projects\ACRCloud_File_Scan\ACRCloud_File_Scan\bin\Debug\Newtonsoft.Json.dll
+\\mac\home\documents\visual studio 2013\Projects\ACRCloud_File_Scan\ACRCloud_File_Scan\bin\Debug\Newtonsoft.Json.xml
+\\mac\home\documents\visual studio 2013\Projects\ACRCloud_File_Scan\ACRCloud_File_Scan\obj\Debug\ACRCloud_File_Scan.csprojResolveAssemblyReference.cache
+\\mac\home\documents\visual studio 2013\Projects\ACRCloud_File_Scan\ACRCloud_File_Scan\obj\Debug\ACRCloud_File_Scan.Properties.Resources.resources
+\\mac\home\documents\visual studio 2013\Projects\ACRCloud_File_Scan\ACRCloud_File_Scan\obj\Debug\ACRCloud_File_Scan.csproj.GenerateResource.Cache
+\\mac\home\documents\visual studio 2013\Projects\ACRCloud_File_Scan\ACRCloud_File_Scan\obj\Debug\ACRCloud_File_Scan.exe
+\\mac\home\documents\visual studio 2013\Projects\ACRCloud_File_Scan\ACRCloud_File_Scan\obj\Debug\ACRCloud_File_Scan.pdb
+\\mac\home\documents\visual studio 2013\Projects\ACRCloud_File_Scan\ACRCloud_File_Scan\obj\Debug\ACRCloud_File_Scan.MainFrom.resources
+\\Mac\Home\Documents\Visual Studio 2013\Projects\ACRCloud_File_Scan\ACRCloud_File_Scan\obj\Debug\ACRCloud_File_Scan.ConfigForm.resources

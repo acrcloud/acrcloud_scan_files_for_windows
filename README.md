@@ -34,4 +34,6 @@ X86: [download and install Library(windows/vcredist_x86.exe)](https://www.micros
 
 ![](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/stepbystep.png)
 
-![](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/example.jpeg)
+![](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/exampleconfig.png)
+
+![](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/example.png)
