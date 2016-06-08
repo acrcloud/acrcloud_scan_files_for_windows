@@ -23,20 +23,27 @@ namespace ACRCloud_File_Scan
         int row_i = 0;
         private void StartButton_Click(object sender, EventArgs e)
         {
-            ResultListBox.Items.Clear();
-            Thread sub = new Thread(Start);
-            if (FilesListBox.Items.Count != 0)
+            if (int.Parse(StopTextBox.Text) < int.Parse(StartTextBox.Text))
             {
-                sub.Start();//开始
-                ChooseFilesButton.Enabled = false;
-                ClearFilesButton.Enabled = false;
-                StartButton.Enabled = false;
-                ExportResultsButton.Enabled = false;
-                FilesListBox.Enabled = false;
+                MessageBox.Show("Stop music bigger than Start");
             }
             else
             {
-                MessageBox.Show("Please choose files you want to recognize");
+                ResultListBox.Items.Clear();
+                Thread sub = new Thread(Start);
+                if (FilesListBox.Items.Count != 0)
+                {
+                    sub.Start();//开始
+                    ChooseFilesButton.Enabled = false;
+                    ClearFilesButton.Enabled = false;
+                    StartButton.Enabled = false;
+                    ExportResultsButton.Enabled = false;
+                    FilesListBox.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Please choose files you want to recognize");
+                }
             }
         }
         public void Enablebuttons()
@@ -105,16 +112,29 @@ namespace ACRCloud_File_Scan
             try
             {
                 int TotalDuration = 0;
-                foreach (string file in FilesListBox.Items)
-                {
-                    ACRCloudExtrTool ACRET = new ACRCloudExtrTool();
-                    TotalDuration = TotalDuration + ACRET.GetDurationMillisecondByFile(file);
+                int INTERCVAL = 0;
+                int START = 0;
+                int STOP = 0;
+                INTERCVAL = int.Parse(IntervalTextBox.Text);
+                START = int.Parse(StartTextBox.Text);
+                STOP = int.Parse(StopTextBox.Text);
 
+                int NowDuration = 0;
+                if (START==0 && STOP == 0)
+                {
+                    foreach (string file in FilesListBox.Items)
+                    {
+                        ACRCloudExtrTool ACRET = new ACRCloudExtrTool();
+                        TotalDuration = TotalDuration + ACRET.GetDurationMillisecondByFile(file);
+                        STOP = TotalDuration;
+                        Console.WriteLine(TotalDuration);
+                    }
+                }
+                else {
+                    TotalDuration = (TotalDuration + STOP - START)*1000;
+                    Console.WriteLine(TotalDuration);
                 }
 
-                int INTERCVAL = 0;
-                INTERCVAL = int.Parse(IntervalTextBox.Text);
-                int NowDuration = 0;
                 if (INTERCVAL < 5)
                 {
                     MessageBox.Show("Interval must be greater than  5  seconds");
@@ -132,9 +152,9 @@ namespace ACRCloud_File_Scan
                 ACRCloudRecognizer re = new ACRCloudRecognizer(config);
                 foreach (string file in FilesListBox.Items)
                 {
-                    int init_sec = 0;
+                    
                     int retry = 3;
-                    while (true) 
+                    for (; START < STOP; START += INTERCVAL)
                     {
                         if (host.Trim() == "")
                         {
@@ -154,13 +174,13 @@ namespace ACRCloud_File_Scan
                             Enablebuttons();
                             break;
                         }
-                        string result = re.RecognizeByFile(file, init_sec);
+                        string result = re.RecognizeByFile(file, START);
                         dynamic stuff;
                         try
                         {
                             stuff = JsonConvert.DeserializeObject(result);
                         }
-                        catch(Exception)
+                        catch (Exception)
                         {
                             stuff = JsonConvert.DeserializeObject(ACRCloudStatusCode.NO_RESULT);
                         }
@@ -171,18 +191,16 @@ namespace ACRCloud_File_Scan
                         {
                             if (file.Equals(FilesListBox.Items[FilesListBox.Items.Count - 1].ToString()))
                             {
-                                Action<String> AsyncUIDelegate = delegate(string n) 
-                                { 
-                                    ExportResultsButton.Enabled = true; 
-                                    ProgressBar.Value = ProgressBar.Maximum; 
+                                Action<String> AsyncUIDelegate = delegate(string n)
+                                {
+                                    ExportResultsButton.Enabled = true;
+                                    ProgressBar.Value = ProgressBar.Maximum;
                                 };
                                 ResultListBox.Invoke(AsyncUIDelegate, new object[] { "" });
-                                MessageBox.Show("Done!");
-                                Enablebuttons();
                             }
                             break;
                         }
-                        else if(code == 3000)
+                        else if (code == 3000)
                         {
                             retry -= 1;
                             if (retry == 0)
@@ -190,7 +208,8 @@ namespace ACRCloud_File_Scan
                                 if (file.Equals(FilesListBox.Items[FilesListBox.Items.Count - 1].ToString()))
                                 {
                                     MessageBox.Show("Please Check Your Network");
-                                    Action<String> AsyncUIDelegate = delegate(string n) { 
+                                    Action<String> AsyncUIDelegate = delegate(string n)
+                                    {
                                         ExportResultsButton.Enabled = true;
                                         ProgressBar.Value = 0;
                                     };
@@ -207,14 +226,14 @@ namespace ACRCloud_File_Scan
                             {
                                 dynamic metadata = stuff.metadata;
                                 Data d = new Data();
-                                d = resdata(metadata,file,init_sec);
+                                d = resdata(metadata, file, START);
                                 SaveData.Save(row_i, d);
                                 row_i++;
-                                result = init_sec.ToString() + "\t" + d.Custom_Files_Title + "\t" + d.Title;
+                                result = START.ToString() + "\t" + d.Custom_Files_Title + "\t" + d.Title;
                             }
                             else if (code == 1001)
                             {
-                                result = init_sec.ToString() + "\t" + "NoResult";
+                                result = START.ToString() + "\t" + "NoResult";
                             }
 
                             else if (code == 3001)
@@ -255,10 +274,10 @@ namespace ACRCloud_File_Scan
                             }
                             else
                             {
-                                result = init_sec.ToString() + "\t" + stuff.status.msg;
+                                result = START.ToString() + "\t" + stuff.status.msg;
                             }
-                            Action<String> AsyncUIDelegate = delegate(string n) 
-                            { 
+                            Action<String> AsyncUIDelegate = delegate(string n)
+                            {
                                 ResultListBox.Items.Add(result);
                                 ResultListBox.Refresh();
                                 ResultListBox.SelectedIndex = this.ResultListBox.Items.Count - 1;
@@ -268,9 +287,10 @@ namespace ACRCloud_File_Scan
                             Action<String> pb = delegate(string n)
                             {
                                 float ProgressBarValue = (float)NowDuration / (float)TotalDuration * 1000000;
+                                Console.WriteLine(ProgressBarValue);
                                 if (ProgressBarValue > 1000)
                                 {
-                                    this.ProgressBar.Value = 1000-INTERCVAL;
+                                    this.ProgressBar.Value = 1000 - INTERCVAL;
                                 }
                                 else
                                 {
@@ -279,11 +299,19 @@ namespace ACRCloud_File_Scan
                             };
                             this.ProgressBar.Invoke(pb, new object[] { "" });
                         }
-                        init_sec += INTERCVAL;
                         NowDuration += INTERCVAL;
-
                     }
+
                 }
+
+                Action<String> AsyncUI = delegate(string n)
+                {
+                    ProgressBar.Value = ProgressBar.Maximum;
+                    ExportResultsButton.Enabled = true;
+                };
+                ExportResultsButton.Invoke(AsyncUI, new object[] { "" });
+                MessageBox.Show("Done!");
+                Enablebuttons();
             }
             catch (Exception e)
             {
@@ -345,66 +373,65 @@ namespace ACRCloud_File_Scan
             if (FBDialog.ShowDialog() == DialogResult.OK)
             {
                 path = FBDialog.SelectedPath;
+                string P_obj_csvName = "";
+                if (path.EndsWith("\\"))
+                    P_obj_csvName = path + DateTime.Now.ToString("yyyyMMddhhmmss") + ".csv";
+                else
+                    P_obj_csvName = path + "\\" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".csv";
+                MessageBox.Show(P_obj_csvName);
+
+                var myExport = new CsvExport();
+
+                for (int i = 1; i <= row_i; i++)
+                {
+                    Data d = SaveData.dicData[i - 1];
+                    int row_ = 1 + i;
+                    int dt_row = i - 1;
+                    myExport.AddRow();
+                    try { myExport["Filename"] = d.Filename; }
+                    catch (Exception) { myExport["Filename"] = ""; }
+
+                    try { myExport["Time"] = formatLongToTimeStr(d.Time); }
+                    catch (Exception) { myExport["Time"] = ""; }
+
+                    try { myExport["Title"] = d.Title.ToString(); }
+                    catch (Exception) { myExport["Title"] = ""; }
+
+                    try { myExport["Artist"] = d.Artist.ToString(); }
+                    catch (Exception) { myExport["Artist"] = ""; }
+
+                    try { myExport["Album"] = d.Album.ToString(); }
+                    catch (Exception) { myExport["Album"] = ""; }
+
+                    try { myExport["Acrid"] = d.Acrid.ToString(); }
+                    catch (Exception) { myExport["Acrid"] = ""; }
+
+                    try { myExport["Label"] = d.Label.ToString(); }
+                    catch (Exception) { myExport["Label"] = ""; }
+
+                    try { myExport["Isrc"] = d.Isrc.ToString(); }
+                    catch (Exception) { myExport["Isrc"] = ""; }
+
+                    try { myExport["Deezer"] = d.Deezer.ToString(); }
+                    catch (Exception) { myExport["Deezer"] = ""; }
+
+                    try { myExport["Spotify"] = d.Spotify.ToString(); }
+                    catch (Exception) { myExport["Spotify"] = ""; }
+
+                    try { myExport["iTunes"] = d.iTunes.ToString(); }
+                    catch (Exception) { myExport["iTunes"] = ""; }
+
+                    try { myExport["Youtube"] = d.Youtube.ToString(); }
+                    catch (Exception) { myExport["Youtube"] = ""; }
+
+                    try { myExport["Custom_Files_Title"] = d.Custom_Files_Title.ToString(); }
+                    catch (Exception) { myExport["Custom_Files_Title"] = ""; }
+
+                    try { myExport["Audio_id"] = d.Audio_id.ToString(); }
+                    catch (Exception) { myExport["Audio_id"] = ""; }
+                }
+                myExport.ExportToFile(P_obj_csvName);
             }
-            string P_obj_csvName = "";
-            if (path.EndsWith("\\"))
-                P_obj_csvName = path + DateTime.Now.ToString("yyyyMMddhhmmss") + ".csv";
-            else
-                P_obj_csvName = path + "\\" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".csv";
-            MessageBox.Show(P_obj_csvName);
-
-            var myExport = new CsvExport();
-
-            for (int i = 1; i <= row_i; i++)
-            {
-                Data d = SaveData.dicData[i - 1];
-                int row_ = 1 + i;
-                int dt_row = i - 1;
-                myExport.AddRow();
-                try { myExport["Filename"] = d.Filename; }
-                catch (Exception) { myExport["Filename"] = ""; }
-
-                try { myExport["Time"] = formatLongToTimeStr(d.Time); }
-                catch (Exception) { myExport["Time"] = ""; }
-
-                try { myExport["Title"] = d.Title.ToString(); }
-                catch (Exception) { myExport["Title"] = ""; }
-
-                try { myExport["Artist"] = d.Artist.ToString(); }
-                catch (Exception) { myExport["Artist"] = ""; }
-
-                try { myExport["Album"] = d.Album.ToString(); }
-                catch (Exception) { myExport["Album"] = ""; }
-
-                try { myExport["Acrid"] = d.Acrid.ToString(); }
-                catch (Exception) { myExport["Acrid"] = ""; }
-
-                try { myExport["Label"] = d.Label.ToString(); }
-                catch (Exception) { myExport["Label"] = ""; }
-
-                try { myExport["Isrc"] = d.Isrc.ToString(); }
-                catch (Exception) { myExport["Isrc"] = ""; }
-
-                try { myExport["Deezer"] = d.Deezer.ToString(); }
-                catch (Exception) { myExport["Deezer"] = ""; }
-
-                try { myExport["Spotify"] = d.Spotify.ToString(); }
-                catch (Exception) { myExport["Spotify"] = ""; }
-
-                try { myExport["iTunes"] = d.iTunes.ToString(); }
-                catch (Exception) { myExport["iTunes"] = ""; }
-
-                try { myExport["Youtube"] = d.Youtube.ToString(); }
-                catch (Exception) { myExport["Youtube"] = ""; }
-
-                try { myExport["Custom_Files_Title"] = d.Custom_Files_Title.ToString(); }
-                catch (Exception) { myExport["Custom_Files_Title"] = ""; }
-
-                try { myExport["Audio_id"] = d.Audio_id.ToString(); }
-                catch (Exception) { myExport["Audio_id"] = ""; }
-            }
-            myExport.ExportToFile(P_obj_csvName);
-
         }
     }
 }

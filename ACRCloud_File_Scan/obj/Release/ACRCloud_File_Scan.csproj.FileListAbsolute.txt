@@ -9,3 +9,4 @@
 \\Mac\Home\Documents\Visual Studio 2013\Projects\ACRCloud_File_Scan\ACRCloud_File_Scan\obj\Release\ACRCloud_File_Scan.csproj.GenerateResource.Cache
 \\Mac\Home\Documents\Visual Studio 2013\Projects\ACRCloud_File_Scan\ACRCloud_File_Scan\obj\Release\ACRCloud_File_Scan.exe
 \\Mac\Home\Documents\Visual Studio 2013\Projects\ACRCloud_File_Scan\ACRCloud_File_Scan\obj\Release\ACRCloud_File_Scan.pdb
+\\Mac\Home\Documents\Visual Studio 2013\Projects\ACRCloud_File_Scan\ACRCloud_File_Scan\obj\Release\ACRCloud_File_Scan.csprojResolveAssemblyReference.cache

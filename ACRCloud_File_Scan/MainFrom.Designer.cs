@@ -36,10 +36,14 @@
             this.FilesListBox = new System.Windows.Forms.ListBox();
             this.StartButton = new System.Windows.Forms.Button();
             this.ExportResultsButton = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ChangeConfigButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.IntervalTextBox = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.StopTextBox = new System.Windows.Forms.TextBox();
+            this.StartTextBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,9 +67,9 @@
             // 
             // ChooseFilesButton
             // 
-            this.ChooseFilesButton.Location = new System.Drawing.Point(15, 15);
+            this.ChooseFilesButton.Location = new System.Drawing.Point(12, 80);
             this.ChooseFilesButton.Name = "ChooseFilesButton";
-            this.ChooseFilesButton.Size = new System.Drawing.Size(130, 50);
+            this.ChooseFilesButton.Size = new System.Drawing.Size(150, 40);
             this.ChooseFilesButton.TabIndex = 2;
             this.ChooseFilesButton.Text = "Choose Files";
             this.ChooseFilesButton.UseVisualStyleBackColor = true;
@@ -73,9 +77,9 @@
             // 
             // ClearFilesButton
             // 
-            this.ClearFilesButton.Location = new System.Drawing.Point(185, 15);
+            this.ClearFilesButton.Location = new System.Drawing.Point(165, 80);
             this.ClearFilesButton.Name = "ClearFilesButton";
-            this.ClearFilesButton.Size = new System.Drawing.Size(130, 50);
+            this.ClearFilesButton.Size = new System.Drawing.Size(150, 40);
             this.ClearFilesButton.TabIndex = 3;
             this.ClearFilesButton.Text = "Clear Files";
             this.ClearFilesButton.UseVisualStyleBackColor = true;
@@ -85,9 +89,9 @@
             // 
             this.FilesListBox.FormattingEnabled = true;
             this.FilesListBox.ItemHeight = 12;
-            this.FilesListBox.Location = new System.Drawing.Point(15, 80);
+            this.FilesListBox.Location = new System.Drawing.Point(15, 130);
             this.FilesListBox.Name = "FilesListBox";
-            this.FilesListBox.Size = new System.Drawing.Size(300, 148);
+            this.FilesListBox.Size = new System.Drawing.Size(300, 100);
             this.FilesListBox.TabIndex = 4;
             // 
             // StartButton
@@ -111,16 +115,6 @@
             this.ExportResultsButton.UseVisualStyleBackColor = true;
             this.ExportResultsButton.Click += new System.EventHandler(this.ExportResultsButton_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(430, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(170, 55);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
-            // 
             // ChangeConfigButton
             // 
             this.ChangeConfigButton.Location = new System.Drawing.Point(340, 190);
@@ -134,7 +128,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(340, 15);
+            this.label1.Location = new System.Drawing.Point(338, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 12);
             this.label1.TabIndex = 9;
@@ -142,17 +136,65 @@
             // 
             // IntervalTextBox
             // 
-            this.IntervalTextBox.Location = new System.Drawing.Point(340, 44);
+            this.IntervalTextBox.Location = new System.Drawing.Point(340, 45);
             this.IntervalTextBox.Name = "IntervalTextBox";
             this.IntervalTextBox.Size = new System.Drawing.Size(80, 21);
             this.IntervalTextBox.TabIndex = 10;
             this.IntervalTextBox.Text = "10";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(15, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(300, 61);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
+            // StopTextBox
+            // 
+            this.StopTextBox.Location = new System.Drawing.Point(520, 45);
+            this.StopTextBox.Name = "StopTextBox";
+            this.StopTextBox.Size = new System.Drawing.Size(80, 21);
+            this.StopTextBox.TabIndex = 18;
+            this.StopTextBox.Text = "0";
+            // 
+            // StartTextBox
+            // 
+            this.StartTextBox.Location = new System.Drawing.Point(430, 45);
+            this.StartTextBox.Name = "StartTextBox";
+            this.StartTextBox.Size = new System.Drawing.Size(80, 21);
+            this.StartTextBox.TabIndex = 17;
+            this.StartTextBox.Text = "0";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(518, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 12);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "Stop:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(428, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Start:";
             // 
             // MainFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(614, 491);
+            this.Controls.Add(this.StopTextBox);
+            this.Controls.Add(this.StartTextBox);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.IntervalTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ChangeConfigButton);
@@ -185,10 +227,14 @@
         private System.Windows.Forms.ListBox FilesListBox;
         private System.Windows.Forms.Button StartButton;
         private System.Windows.Forms.Button ExportResultsButton;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button ChangeConfigButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox IntervalTextBox;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TextBox StopTextBox;
+        private System.Windows.Forms.TextBox StartTextBox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
     }
 }
 
