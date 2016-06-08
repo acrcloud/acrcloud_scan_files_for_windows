@@ -23,6 +23,8 @@ namespace ACRCloud_File_Scan
         int row_i = 0;
         private void StartButton_Click(object sender, EventArgs e)
         {
+            SaveData.Clear();
+            row_i = 0;
             if (int.Parse(StopTextBox.Text) < int.Parse(StartTextBox.Text))
             {
                 MessageBox.Show("Stop music bigger than Start");

@@ -15,5 +15,9 @@ namespace ACRCloud_File_Scan
             dicData.Add(i, d);   
         }
 
+        public static void Clear()
+        {
+            dicData.Clear();
+        }
     }
 }
