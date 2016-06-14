@@ -32,20 +32,20 @@ X86: [download and install Library(windows/vcredist_x86.exe)](https://www.micros
 
 4.Export the result.
 
-![stepbystep](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/stepbystep.png)
+<img src="https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/stepbystep.png" width="50%" height="50%">
 
-![scan_example](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/scan_example.png)
+<img src="https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/scan_example.png" width="50%" height="50%">
 
-![export_results](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/export.png)
+<img src="https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/export.png" width="50%" height="50%">
 
 ## Change Settings
 
-If you want to change scan interval, you can change the interval textbox.
+- If you want to change scan interval, you can change the interval textbox.
 
-![change_interval](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/change_interval.png)
+<img src="https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/change_interval.png" width="50%" height="50%">
 
-If you want to change scan range, you can change the start textbox ande stop textbox.
+- If you want to change scan range, you can change the start textbox ande stop textbox.
 
-![change_range](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/change_range.png)
+<img src="https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/change_range.png" width="50%" height="50%">
 
-If you want to change host or key and secert, you can click change config button.
+- If you want to change host or key and secert, you can click change config button.
