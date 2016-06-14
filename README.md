@@ -24,7 +24,7 @@ X86: [download and install Library(windows/vcredist_x86.exe)](https://www.micros
 
 ## Usage
 
-1.Fill in the host, Access key, Access secret. 
+1.When you first run the program. Fill in the host, Access key, Access secret. 
 
 2.Choose File(Files) you want to recognize.
 
@@ -32,8 +32,20 @@ X86: [download and install Library(windows/vcredist_x86.exe)](https://www.micros
 
 4.Export the result.
 
-![](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/stepbystep.png)
+![stepbystep](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/stepbystep.png)
 
-![](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/exampleconfig.png)
+![scan_example](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/scan_example.png)
 
-![](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/example.png)
+![export_results](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/export.png)
+
+## Change Settings
+
+If you want to change scan interval, you can change the interval textbox.
+
+![change_interval](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/change_interval.png)
+
+If you want to change scan range, you can change the start textbox ande stop textbox.
+
+![change_range](https://github.com/acrcloud/acrcloud_scan_files_for_windows/raw/master/imgs/change_range.png)
+
+If you want to change host or key and secert, you can click change config button.
