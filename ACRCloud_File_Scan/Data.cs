@@ -14,6 +14,7 @@ namespace ACRCloud_File_Scan
         public string Artist { get; set; }
         public string Album { get; set; }
         public string Acrid { get; set; }
+        public string Offset { get; set; }
         public string Label { get; set; }
         public string Isrc { get; set; }
         public string Deezer { get; set; }

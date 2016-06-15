@@ -83,6 +83,9 @@ namespace ACRCloud_File_Scan
             try { d.Acrid = metadata.music[0].acrid; }
             catch (Exception) { d.Acrid = ""; }
 
+            try { d.Offset = metadata.music[0].play_offset_ms; }
+            catch (Exception) { d.Offset = ""; }
+
             try { d.Label = metadata.music[0].label; }
             catch (Exception) { d.Label = ""; }
 
@@ -407,6 +410,9 @@ namespace ACRCloud_File_Scan
 
                     try { myExport["Acrid"] = d.Acrid.ToString(); }
                     catch (Exception) { myExport["Acrid"] = ""; }
+
+                    try { myExport["Play Offset(ms)"] = d.Offset.ToString(); }
+                    catch (Exception) { myExport["Play Offset(ms)"] = ""; }
 
                     try { myExport["Label"] = d.Label.ToString(); }
                     catch (Exception) { myExport["Label"] = ""; }

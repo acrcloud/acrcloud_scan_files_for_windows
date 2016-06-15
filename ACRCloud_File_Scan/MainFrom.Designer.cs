@@ -130,9 +130,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(338, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 12);
+            this.label1.Size = new System.Drawing.Size(77, 12);
             this.label1.TabIndex = 9;
-            this.label1.Text = "Interval:";
+            this.label1.Text = "Interval(s):";
             // 
             // IntervalTextBox
             // 
@@ -173,18 +173,18 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(518, 15);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 12);
+            this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 16;
-            this.label3.Text = "Stop:";
+            this.label3.Text = "Stop(s):";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(428, 15);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.Size = new System.Drawing.Size(59, 12);
             this.label2.TabIndex = 15;
-            this.label2.Text = "Start:";
+            this.label2.Text = "Start(s):";
             // 
             // MainFrom
             // 
