@@ -123,21 +123,18 @@ namespace ACRCloud_File_Scan
                 INTERCVAL = int.Parse(IntervalTextBox.Text);
                 START = int.Parse(StartTextBox.Text);
                 STOP = int.Parse(StopTextBox.Text);
-
                 int NowDuration = 0;
-                if (START==0 && STOP == 0)
+                if (START==0 && STOP==0)
                 {
                     foreach (string file in FilesListBox.Items)
                     {
                         ACRCloudExtrTool ACRET = new ACRCloudExtrTool();
                         TotalDuration = TotalDuration + ACRET.GetDurationMillisecondByFile(file);
                         STOP = TotalDuration;
-                        Console.WriteLine(TotalDuration);
                     }
                 }
                 else {
                     TotalDuration = (TotalDuration + STOP - START)*1000;
-                    Console.WriteLine(TotalDuration);
                 }
 
                 if (INTERCVAL < 5)
@@ -157,7 +154,6 @@ namespace ACRCloud_File_Scan
                 ACRCloudRecognizer re = new ACRCloudRecognizer(config);
                 foreach (string file in FilesListBox.Items)
                 {
-                    
                     int retry = 3;
                     for (; START < STOP; START += INTERCVAL)
                     {
@@ -203,7 +199,9 @@ namespace ACRCloud_File_Scan
                                 };
                                 ResultListBox.Invoke(AsyncUIDelegate, new object[] { "" });
                             }
+                            START = 0;
                             break;
+
                         }
                         else if (code == 3000)
                         {
@@ -292,7 +290,6 @@ namespace ACRCloud_File_Scan
                             Action<String> pb = delegate(string n)
                             {
                                 float ProgressBarValue = (float)NowDuration / (float)TotalDuration * 1000000;
-                                Console.WriteLine(ProgressBarValue);
                                 if (ProgressBarValue > 1000)
                                 {
                                     this.ProgressBar.Value = 1000 - INTERCVAL;
